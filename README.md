@@ -1,15 +1,25 @@
-# Chicago Food Inspections Dashboard
+# Chicago Food Inspections 
 
 A full-stack application for viewing, searching, and analyzing Chicago Department of Public Health (CDPH) food inspection data. Built with React + TypeScript frontend and Node.js + Express backend.
 
-## 📋 Project Overview
+---
 
-This project provides a comprehensive platform for:
-- **Search & Browse**: Find facilities by name, license, or location
-- **View Inspections**: Access detailed inspection records with violation data
-- **Analytics Dashboard**: Visualize trends, risk distribution, and facility data
-- **Interactive Maps**: Explore facility locations and inspection results geographically
-- **Data Management**: Create, edit, and delete facility records (admin functionality)
+## 🔍 Project Overview
+
+The Chicago Food Inspections platform transforms raw government inspection data into a
+structured, searchable, and interactive system that allows users to explore food safety
+records across the city.
+
+Key capabilities include:
+- Inspection history lookup by facility
+- Risk-level analysis
+- Interactive charts and maps
+- CRUD-based data management for inspection records
+
+The system improves public transparency, supports data-driven decision-making, and
+makes complex inspection data accessible to both citizens and officials.
+
+---
 
 ## 🏗️ Architecture
 
@@ -41,6 +51,79 @@ This project provides a comprehensive platform for:
     ├── package.json
     └── vite.config.ts
 ```
+---
+
+## 👩‍💻 My Role & Contributions (Primary Focus)
+
+**Role:** Application & Interface Development (Frontend + Integration)
+
+I was responsible for building the **user-facing application layer** and connecting
+frontend features to backend APIs and the database.
+
+### Core Contributions
+- Designed and implemented the **React-based frontend** using Material UI
+- Built responsive dashboards displaying:
+  - Total facilities and inspections
+  - Risk-level distribution
+  - Recent inspection activity
+- Developed **interactive data visualizations** using Chart.js
+- Implemented **advanced search functionality** with real-time filtering
+- Built editable data grids enabling CRUD operations on facilities
+- Integrated geographic mapping features with:
+  - Risk-based color coding
+  - Marker clustering for performance
+  - Click-to-view facility details
+- Improved performance for large datasets through:
+  - Lazy loading
+  - Zoom-based filtering
+  - Clustered map rendering
+- Collaborated closely with backend and database layers to ensure consistent data models
+
+
+## 🧱 System Architecture (High Level)
+
+- **Frontend:** React 18, Material UI, Chart.js, Leaflet
+- **Backend:** Express.js, SQLAlchemy, Pydantic
+- **Database:** PostgreSQL 16 with PostGIS
+- **Architecture Pattern:** Bronze–Silver–Gold Medallion ETL design
+
+### Data Pipeline
+- **Bronze Layer:** Raw CSV ingestion from Chicago Open Data
+- **Silver Layer:** Data cleaning, validation, and standardization
+- **Gold Layer:** Analytics-ready, normalized schema with spatial indexing
+
+---
+
+## 📊 Key Features Implemented
+
+### Dashboard
+- Overview statistics (facilities, inspections, risk distribution)
+- Recent inspections table
+- Visual summaries for quick insights
+
+### Facilities Management
+- Paginated facility listing
+- Inline editing and deletion
+- Real-time updates across the application
+
+### Advanced Search
+- Partial and exact matching
+- License number and facility name support
+- Integrated CRUD actions
+
+### Visual Analytics
+- Risk distribution charts
+- Inspection result breakdowns
+- Top violations analysis
+- Temporal inspection trends
+
+### Geographic Mapping
+- City-wide facility map
+- Risk-based color-coded markers
+- Marker clustering for scalability
+- Interactive facility detail views
+
+---
 
 ## 🚀 Quick Start
 
@@ -81,226 +164,33 @@ npm install
 npm run dev
 # Application starts at http://localhost:5173
 ```
+---
 
-## 📚 API Endpoints
+## 🚧 Deployment Status
 
-### Facilities
-- `GET /api/facilities/with-latest-inspection` - Get facilities with latest inspection
-  - Query params: `search`, `city`, `risk`, `results`, `limit`, `offset`
-- `GET /api/facilities/search/name?q=query` - Search by name
-- `GET /api/facilities/search/license?license=XXX` - Search by license
-- `POST /api/facilities` - Create facility
-- `PUT /api/facilities/:license_number` - Update facility
-- `DELETE /api/facilities/:license_number` - Delete facility
+The application currently runs in **local development mode only**.
 
-### Inspections
-- `GET /api/inspections` - Get inspections with filters
-  - Query params: `from`, `to`, `risk`, `result`
-- `GET /api/inspections/:inspection_id` - Get inspection details
-
-### Analytics & Visualizations
-- `GET /api/analytics` - Dashboard data (trends, risk distribution, results)
-- `GET /api/analytics/map-data` - Facility locations for mapping
-- `GET /api/analytics/risk-by-facility-type` - Risk distribution by type
-- `GET /api/analytics/inspections-by-zip` - Inspection counts by ZIP code
-- `GET /api/analytics/stats` - Overall statistics summary
-
-### Violations
-- `GET /api/violations?license_number=XXX` - Violation history
-- `GET /api/violations/types` - Common violation types
-
-## 🎨 Features
-
-### Dashboard
-- **Pass Rate Trend**: 12-month inspection pass rate line chart
-- **Inspection Volume**: Monthly pass/fail inspection counts
-- **Risk Distribution**: Facilities by risk level (doughnut chart)
-- **Results Breakdown**: Inspection outcomes distribution
-
-### Facility Map
-- Interactive Plotly mapbox visualization
-- 5,000+ facility locations with latest inspection data
-- Color-coded by inspection result (Green=Pass, Red=Fail, Orange=Conditional)
-- Search functionality to filter facilities
-
-### Analytics
-- **Risk by Facility Type**: Grouped bar chart of top 15 facility types
-- **Inspections by ZIP Code**: Top 30 ZIP codes with color-scale quintiles
-- Responsive grid layout with tabbed navigation
-
-### Facility Search
-- Professional DataGrid with 50-record pagination
-- Search by name or license number
-- Edit and delete facility capabilities
-- Filter by city, risk level, and inspection result
-
-### Inspections
-- Date range filtering
-- Risk level and result filtering
-- Detailed violation data
-- Results breakdown visualization
-
-## 💾 Database Schema
-
-### Core Tables (Gold Schema)
-- **facility**: Establishment information
-- **facility_location**: Geographic and address details
-- **inspection**: Individual inspection records
-- **inspection_outcome**: Results, risk levels, and violations
-
-## 🔧 Tech Stack
-
-### Backend
-- **Express.js**: REST API framework
-- **PostgreSQL**: Relational database
-- **pg**: PostgreSQL driver with connection pooling
-- **Node.js**: JavaScript runtime
-
-### Frontend
-- **React 18**: UI framework with TypeScript
-- **Vite**: Build tool and dev server
-- **Material-UI (MUI)**: Component library and theming
-- **Chart.js**: Dashboard charts (line, bar, doughnut)
-- **Plotly.js**: Interactive visualizations (maps, bar charts)
-- **React Query**: Data fetching and caching
-- **React Router**: Navigation and routing
-- **Leaflet**: Map library integration
-
-## 📊 Data Statistics
-
-- **Total Facilities**: 47,494
-- **Total Inspections**: 500,000+
-- **Data Range**: 2015 - Present
-- **Cities Covered**: 156+
-- **Risk Levels**: High, Medium, Low, Not Mentioned
-
-## 🔐 Security
-
-- ✅ Parameterized SQL queries (SQL injection prevention)
-- ✅ Input validation and sanitization
-- ✅ Environment variable management
-- ✅ CORS configuration
-- ✅ Error handling with safe error messages
-
-## 📈 Performance Features
-
-- Database indexing on frequently queried columns
-- Connection pooling for efficient database access
-- Pagination for large result sets
-- Responsive design for all viewport sizes
-- Lazy loading of visualization components
-
-## 🚢 Deployment
-
-### Production Checklist
-- [ ] Set `NODE_ENV=production`
-- [ ] Configure PostgreSQL backups
-- [ ] Enable SSL/TLS connections
-- [ ] Set up environment variables securely
-- [ ] Configure CORS for production domain
-- [ ] Enable rate limiting
-- [ ] Set up monitoring and logging
-
-### Recommended Platforms
-- **Backend**: Heroku, Railway, Render, AWS EC2
-- **Frontend**: Vercel, Netlify, AWS S3 + CloudFront
-- **Database**: AWS RDS, Heroku Postgres, Digital Ocean
-
-## 📖 Documentation
-
-- [Backend Documentation](./food-inspections-api/BACKEND-DOCUMENTATION.md) - API reference, database schema, query patterns
-- [Frontend Integration Guide](./food-inspections-api/FRONTEND-INTEGRATION-GUIDE.md) - How to integrate with the API
-- [Quickstart Guide](./food-inspections-api/QUICKSTART.md) - Quick setup instructions
-
-## 🐛 Troubleshooting
-
-### Backend Issues
-**Port already in use:**
-```bash
-lsof -i :3000
-kill -9 <PID>
-```
-
-**Database connection error:**
-- Verify PostgreSQL is running
-- Check `.env` database credentials
-- Ensure database exists: `createdb food_inspections`
-
-### Frontend Issues
-**Port already in use:**
-```bash
-npm run dev -- --port 5174
-```
-
-**CORS errors:**
-- Ensure backend is running on port 3000
-- Check CORS configuration in `server.js`
-
-## 🤝 Contributing
-
-1. Create a feature branch: `git checkout -b feature/your-feature`
-2. Make changes and commit: `git commit -m "Add feature description"`
-3. Push to GitHub: `git push origin feature/your-feature`
-4. Open a Pull Request on GitHub
-
-## 📝 Git Workflow
-
-```bash
-# Clone repository
-git clone https://github.com/adithhari/CDPH-foodinspections.git
-
-# Create feature branch
-git checkout -b feature/new-feature
-
-# Make changes
-git add .
-git commit -m "Descriptive commit message"
-
-# Push to GitHub
-git push origin feature/new-feature
-
-# Create Pull Request on GitHub UI
-```
-
-## 📄 License
-
-This project is part of the CDPH Food Inspections analysis. Data sourced from Chicago Department of Public Health.
-
-## 🙋 Support
-
-For issues, questions, or suggestions:
-1. Check existing [GitHub Issues](https://github.com/adithhari/CDPH-foodinspections/issues)
-2. Create a new issue with detailed description
-3. Include error messages and steps to reproduce
-
-## 🎯 Future Enhancements
-
-- [ ] Export data to CSV/Excel
-- [ ] Advanced filtering with saved searches
-- [ ] Inspection history timeline
-- [ ] Violation trend analysis
-- [ ] Facility comparison tool
-- [ ] Mobile-responsive optimizations
-- [ ] Dark mode improvements
-- [ ] Multi-language support
-- [ ] Real-time data updates
-- [ ] Authentication & user roles
-
-## 📊 Project Statistics
-
-- **Lines of Code**: 7,000+
-- **API Endpoints**: 15+
-- **React Components**: 30+
-- **Database Tables**: 4
-- **Test Coverage**: In Progress
+Public deployment was blocked due to:
+- PostGIS hosting limitations on free tiers
+- Large dataset size (250,000+ records, ~2GB)
+- CORS and cross-domain configuration challenges
+- Cost constraints for production-grade infrastructure
 
 ---
 
-**Last Updated**: December 2025
+## 🧠 Key Learnings
 
-**Repository**: https://github.com/adithhari/CDPH-foodinspections
+- Large-scale data cleaning often consumes **50%+ of project effort**
+- Performance optimization is critical for geographic visualizations
+- Deployment introduces real-world constraints absent in local development
+- Maintaining type consistency across backend and frontend is non-trivial
+- End-to-end ownership builds deeper system understanding
 
-**Authors**: 
-- Adith <adithharinarayanan@github.com> 
-- Srushti <srushti-s@github.com> 
-- Humaid <humaidilyas@github.com>
+---
+
+## 🤝 Original Team Project
+
+This work is based on a collaborative academic project developed by a team of three.
+
+🔗 Original Repository:  
+https://github.com/adithhari/CDPH-foodinspections
